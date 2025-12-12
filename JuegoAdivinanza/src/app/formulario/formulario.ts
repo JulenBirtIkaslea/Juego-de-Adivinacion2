@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Configuracion } from '../models/configuracion.model';
+//componente Juego importado para usarlo dentro del formulario
+import { Juego } from '../juego/juego';
 
 @Component({
   selector: 'app-formulario',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Juego],
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })

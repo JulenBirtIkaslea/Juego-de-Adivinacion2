@@ -1,9 +1,12 @@
 <!-- ---------------------------------Campo 1--------------------------------- -->
 <h2>Configuración del juego</h2>
 
+
+
 <label>
   Nombre y Apellido del jugador
-  <input type="text" [(ngModel)]="fullName" name="fullName" />
+  <input type="text" [(ngModel)]="fullName" name="fullName" 
+  [disabled]="configuracion !== null"/>
 </label>
 
 <p>Valor actual: {{ fullName }}</p>
@@ -21,7 +24,8 @@
 <!-- ---------------------------------Campo 2--------------------------------- -->
 <label>
   Rango máximo del número aleatorio a generar
-  <input type="number" [(ngModel)]="maxRange" name="maxRange" />
+  <input type="number" [(ngModel)]="maxRange" name="maxRange" 
+  [disabled]="configuracion !== null"/>
 </label>
 
 <p>Rango máximo: {{ maxRange }}</p>
@@ -39,7 +43,8 @@
 <!-- ---------------------------------Campo 3--------------------------------- -->
 <label>
   Número de intentos que tendrás para adivinar el número
-  <input type="number" [(ngModel)]="maxAttempts" name="maxAttempts" />
+  <input type="number" [(ngModel)]="maxAttempts" name="maxAttempts"  
+  [disabled]="configuracion !== null"/>
 </label>
 
 <p>Número de intentos: {{ maxAttempts }}</p>
@@ -56,7 +61,14 @@
 <button
   type="button"
   (click)="recogerDatos()"
-  [disabled]="!canRecogerDatos()"
+  [disabled]="!canRecogerDatos() || configuracion !== null" 
 >
   Recoger datos
 </button>
+
+<!-- ---------------------------------Juego Componente--------------------------------- -->
+
+<app-juego
+  *ngIf="configuracion"
+  [configuracion]="configuracion">
+</app-juego>
