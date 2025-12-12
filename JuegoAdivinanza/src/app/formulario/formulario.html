@@ -1,73 +1,90 @@
 <!-- ---------------------------------Campo 1--------------------------------- -->
-<h2>Configuración del juego</h2>
+<h2 class="title">Configuración del juego</h2>
 
-
-
-<label>
+<label class="label">
   Nombre y Apellido del jugador
-  <input type="text" [(ngModel)]="fullName" name="fullName" 
-  [disabled]="configuracion !== null"/>
+  <input
+    class="input"
+    type="text"
+    [(ngModel)]="fullName"
+    name="fullName"
+    (blur)="nameTouched = true"  
+    [disabled]="configuracion !== null"
+  />
 </label>
 
-<p>Valor actual: {{ fullName }}</p>
+<p class="debug">Valor actual: {{ fullName }}</p>
 
 <!--Tick verde si correcto -->
-<div *ngIf="isNameOk()" style="color: green;">✅ Correcto</div>
+<div *ngIf="nameTouched && isNameOk()" class="ok">✅ Correcto</div>
 
 <!--Feedback rojo si incorrecto -->
-<small *ngIf="!isNameOk()" style="color: red;">
+<small *ngIf="nameTouched && !isNameOk()" class="error">
   El nombre no puede estar vacío
 </small>
 
-<hr />
+<hr class="divider" />
 
 <!-- ---------------------------------Campo 2--------------------------------- -->
-<label>
+<label class="label">
   Rango máximo del número aleatorio a generar
-  <input type="number" [(ngModel)]="maxRange" name="maxRange" 
-  [disabled]="configuracion !== null"/>
+  <input
+    class="input"
+    type="number"
+    [(ngModel)]="maxRange"
+    name="maxRange"
+    (blur)="rangeTouched = true"  
+    [disabled]="configuracion !== null"
+  />
 </label>
 
-<p>Rango máximo: {{ maxRange }}</p>
+<p class="debug">Rango máximo: {{ maxRange }}</p>
 
 <!-- Tick verde si correcto -->
-<div *ngIf="isRangeOk()" style="color: green;">✅ Correcto</div>
+<div *ngIf="rangeTouched && isRangeOk()" class="ok">✅ Correcto</div>
 
 <!-- Feedback rojo si incorrecto -->
-<small *ngIf="!isRangeOk()" style="color: red;">
+<small *ngIf="rangeTouched && !isRangeOk()" class="error">
   El número introducido es menor que el rango mínimo (4)
 </small>
 
-<hr />
+<hr class="divider" />
 
 <!-- ---------------------------------Campo 3--------------------------------- -->
-<label>
+<label class="label">
   Número de intentos que tendrás para adivinar el número
-  <input type="number" [(ngModel)]="maxAttempts" name="maxAttempts"  
-  [disabled]="configuracion !== null"/>
+  <input
+    class="input"
+    type="number"
+    [(ngModel)]="maxAttempts"
+    name="maxAttempts"
+    (blur)="attemptsTouched = true" 
+    [disabled]="configuracion !== null"
+  />
 </label>
 
-<p>Número de intentos: {{ maxAttempts }}</p>
+<p class="debug">Número de intentos: {{ maxAttempts }}</p>
 
 <!-- Tick verde si correcto -->
-<div *ngIf="isAttemptsOk()" style="color: green;">✅ Correcto</div>
+<div *ngIf="attemptsTouched && isAttemptsOk()" class="ok">✅ Correcto</div>
 
 <!-- Feedback rojo si incorrecto -->
-<small *ngIf="!isAttemptsOk()" style="color: red;">
+<small *ngIf="attemptsTouched && !isAttemptsOk()" class="error">
   Debes indicar el número de intentos
 </small>
 
+<hr class="divider" />
 <!-- ---------------------------------Boton--------------------------------- -->
 <button
+  class="btn btn-primary"
   type="button"
   (click)="recogerDatos()"
-  [disabled]="!canRecogerDatos() || configuracion !== null" 
+  [disabled]="!canRecogerDatos() || configuracion !== null"
 >
   Recoger datos
 </button>
 
 <!-- ---------------------------------Juego Componente--------------------------------- -->
-
 <app-juego
   *ngIf="configuracion"
   [configuracion]="configuracion">

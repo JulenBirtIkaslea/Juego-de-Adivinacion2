@@ -30,6 +30,11 @@ export class Formulario {
   //Objeto Configuracion que se creará al pulsar el botón
   configuracion: Configuracion | null = null;
 
+  //Control de blur (si el usuario ha salido del input)
+  nameTouched = false;
+  rangeTouched = false;
+  attemptsTouched = false;
+
   //Genera un número aleatorio entre 0 y (rango - 1)
   generarNumeroAleatorio(rango: number): number {
     return Math.floor(Math.random() * rango);
@@ -51,6 +56,7 @@ export class Formulario {
     //Validación del rango mínimo (mínimo 4)
     if (this.maxRange !== null && this.maxRange >= 4) {
       random = this.generarNumeroAleatorio(this.maxRange);
+       this.rangeError = false;
     } else {
       //Marcar error de rango en el feedback
       this.rangeError = true;
