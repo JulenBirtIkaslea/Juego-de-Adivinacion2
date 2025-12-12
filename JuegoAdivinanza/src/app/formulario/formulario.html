@@ -1,9 +1,50 @@
-<p>formularyio works!</p>
-<label for="nombre">Nombre y apellidos</label>
-<input
-  id="nombre"
-  name="nombre"
-  type="text"
-  placeholder="Ej. Julen Rodrígueeeez"
-  required
-/>
+<!-- Campo 1 -->
+<h2>Configuración del juego</h2>
+
+<label>
+  Nombre y Apellido del jugador
+  <input type="text" [(ngModel)]="fullName" name="fullName" />
+</label>
+
+<p>Valor actual: {{ fullName }}</p>
+
+<!-- Texto oculto -->
+<small *ngIf="nameError" style="color: red;">
+  El nombre no puede estar vacío
+</small>
+
+<hr />
+
+<!-- Campo 2 -->
+<label>
+  Rango máximo del número aleatorio a generar
+  <input type="number" [(ngModel)]="maxRange" name="maxRange" />
+</label>
+
+<p>Rango máximo: {{ maxRange }}</p>
+
+<!-- Texto oculto -->
+<small *ngIf="rangeError" style="color: red;">
+  El rango introducido no es válido
+</small>
+
+<hr />
+
+
+<!-- Campo 3 -->
+<label>
+  Número de intentos que tendrás para adivinar el número
+  <input type="number" [(ngModel)]="maxAttempts" name="maxAttempts" />
+</label>
+
+<p>Número de intentos: {{ maxAttempts }}</p>
+
+<!-- Texto oculto -->
+<small *ngIf="attemptsError" style="color: red;">
+  El número de intentos no es válido
+</small>
+
+<!--Botón de recogida de datos -->
+<button type="button" (click)="recogerDatos()">
+  Recoger datos
+</button>
