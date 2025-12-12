@@ -1,4 +1,4 @@
-<!-- Campo 1 -->
+<!-- ---------------------------------Campo 1--------------------------------- -->
 <h2>Configuración del juego</h2>
 
 <label>
@@ -8,14 +8,17 @@
 
 <p>Valor actual: {{ fullName }}</p>
 
-<!-- Texto oculto -->
-<small *ngIf="nameError" style="color: red;">
+<!--Tick verde si correcto -->
+<div *ngIf="isNameOk()" style="color: green;">✅ Correcto</div>
+
+<!--Feedback rojo si incorrecto -->
+<small *ngIf="!isNameOk()" style="color: red;">
   El nombre no puede estar vacío
 </small>
 
 <hr />
 
-<!-- Campo 2 -->
+<!-- ---------------------------------Campo 2--------------------------------- -->
 <label>
   Rango máximo del número aleatorio a generar
   <input type="number" [(ngModel)]="maxRange" name="maxRange" />
@@ -23,15 +26,17 @@
 
 <p>Rango máximo: {{ maxRange }}</p>
 
-<!-- Texto oculto -->
-<small *ngIf="rangeError" style="color: red;">
-  El rango introducido no es válido
+<!-- Tick verde si correcto -->
+<div *ngIf="isRangeOk()" style="color: green;">✅ Correcto</div>
+
+<!-- Feedback rojo si incorrecto -->
+<small *ngIf="!isRangeOk()" style="color: red;">
+  El número introducido es menor que el rango mínimo (4)
 </small>
 
 <hr />
 
-
-<!-- Campo 3 -->
+<!-- ---------------------------------Campo 3--------------------------------- -->
 <label>
   Número de intentos que tendrás para adivinar el número
   <input type="number" [(ngModel)]="maxAttempts" name="maxAttempts" />
@@ -39,12 +44,19 @@
 
 <p>Número de intentos: {{ maxAttempts }}</p>
 
-<!-- Texto oculto -->
-<small *ngIf="attemptsError" style="color: red;">
-  El número de intentos no es válido
+<!-- Tick verde si correcto -->
+<div *ngIf="isAttemptsOk()" style="color: green;">✅ Correcto</div>
+
+<!-- Feedback rojo si incorrecto -->
+<small *ngIf="!isAttemptsOk()" style="color: red;">
+  Debes indicar el número de intentos
 </small>
 
-<!--Botón de recogida de datos -->
-<button type="button" (click)="recogerDatos()">
+<!-- ---------------------------------Boton--------------------------------- -->
+<button
+  type="button"
+  (click)="recogerDatos()"
+  [disabled]="!canRecogerDatos()"
+>
   Recoger datos
 </button>

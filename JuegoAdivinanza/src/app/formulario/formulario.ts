@@ -28,16 +28,64 @@ export class Formulario {
   //Objeto Configuracion que se creará al pulsar el botón
   configuracion: Configuracion | null = null;
 
-  //Método que se ejecuta al pulsar "Recoger datos"
-  recogerDatos() {
-  // Crear el objeto Configuracion usando la class
-  this.configuracion = new Configuracion(
-  this.fullName,
-  this.maxRange,
-  this.maxAttempts
-  );
+  //Genera un número aleatorio entre 0 y (rango - 1)
+  generarNumeroAleatorio(rango: number): number {
+    return Math.floor(Math.random() * rango);
+  }
 
-  //Comprobación por consola (opcional)
-  console.log('Configuración creada:', this.configuracion);
+  //Botón "Recoger datos"
+  recogerDatos() {
+    
+    //Validación: nombre y apellido no pueden estar vacíos
+    if (this.fullName.trim() === '') {
+      this.nameError = true;   // activacion de feedback
+      return;                 // salimos del método
+    } else {
+      this.nameError = false;  // quitar error cuando esta bien
+    }
+
+    let random: number | null = null;
+
+    //Validación del rango mínimo (mínimo 4)
+    if (this.maxRange !== null && this.maxRange >= 4) {
+      random = this.generarNumeroAleatorio(this.maxRange);
+    } else {
+      //Marcar error de rango en el feedback
+      this.rangeError = true;
+      return;
+    }
+
+    //Crear el objeto Configuracion
+    this.configuracion = new Configuracion(
+      this.fullName,
+      this.maxRange,
+      this.maxAttempts,
+      //random no lleva this. porque es una variable local
+      random
+    );
+
+    console.log('Configuración creada:', this.configuracion);
+  }
+
+  //Validaciones en tiempo real
+  isNameOk(): boolean {
+    //trim para eliminar espacios en blanco
+    return this.fullName.trim() !== '';
+  }
+
+  //Rango mínimo 4
+  isRangeOk(): boolean {
+    return this.maxRange !== null && this.maxRange >= 4;
+  }
+
+  //intentos  mínimo 1
+  isAttemptsOk(): boolean {
+  return this.maxAttempts !== null && this.maxAttempts >= 1;
 }
+
+  //Botón activo solo si los 3 metodos anteriores están OK
+  canRecogerDatos(): boolean {
+    return this.isNameOk() && this.isRangeOk() && this.isAttemptsOk();
+  }
+
 }
