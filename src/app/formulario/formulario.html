@@ -1,0 +1,91 @@
+<!-- ---------------------------------Campo 1--------------------------------- -->
+<h2 class="title">Configuración del juego</h2>
+
+<label class="label">
+  Nombre y Apellido del jugador
+  <input
+    class="input"
+    type="text"
+    [(ngModel)]="fullName"
+    name="fullName"
+    (blur)="nameTouched = true"  
+    [disabled]="configuracion !== null"
+  />
+</label>
+
+<p class="debug">Valor actual: {{ fullName }}</p>
+
+<!--Tick verde si correcto -->
+<div *ngIf="nameTouched && isNameOk()" class="ok">✅ Correcto</div>
+
+<!--Feedback rojo si incorrecto -->
+<small *ngIf="nameTouched && !isNameOk()" class="error">
+  El nombre no puede estar vacío
+</small>
+
+<hr class="divider" />
+
+<!-- ---------------------------------Campo 2--------------------------------- -->
+<label class="label">
+  Rango máximo del número aleatorio a generar
+  <input
+    class="input"
+    type="number"
+    [(ngModel)]="maxRange"
+    name="maxRange"
+    (blur)="rangeTouched = true"  
+    [disabled]="configuracion !== null"
+  />
+</label>
+
+<p class="debug">Rango máximo: {{ maxRange }}</p>
+
+<!-- Tick verde si correcto -->
+<div *ngIf="rangeTouched && isRangeOk()" class="ok">✅ Correcto</div>
+
+<!-- Feedback rojo si incorrecto -->
+<small *ngIf="rangeTouched && !isRangeOk()" class="error">
+  El número introducido es menor que el rango mínimo (4)
+</small>
+
+<hr class="divider" />
+
+<!-- ---------------------------------Campo 3--------------------------------- -->
+<label class="label">
+  Número de intentos que tendrás para adivinar el número
+  <input
+    class="input"
+    type="number"
+    [(ngModel)]="maxAttempts"
+    name="maxAttempts"
+    (blur)="attemptsTouched = true" 
+    [disabled]="configuracion !== null"
+  />
+</label>
+
+<p class="debug">Número de intentos: {{ maxAttempts }}</p>
+
+<!-- Tick verde si correcto -->
+<div *ngIf="attemptsTouched && isAttemptsOk()" class="ok">✅ Correcto</div>
+
+<!-- Feedback rojo si incorrecto -->
+<small *ngIf="attemptsTouched && !isAttemptsOk()" class="error">
+  Debes indicar el número de intentos
+</small>
+
+<hr class="divider" />
+<!-- ---------------------------------Boton--------------------------------- -->
+<button
+  class="btn btn-primary"
+  type="button"
+  (click)="recogerDatos()"
+  [disabled]="!canRecogerDatos() || configuracion !== null"
+>
+  Recoger datos
+</button>
+
+<!-- ---------------------------------Juego Componente--------------------------------- -->
+<app-juego
+  *ngIf="configuracion"
+  [configuracion]="configuracion">
+</app-juego>

@@ -1,0 +1,79 @@
+:host {
+    display: block;
+    max-width: 620px;
+    margin: 24px auto;
+    padding: 18px;
+    border: 1px solid #e6e6e6;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+    margin: 0 0 14px 0;
+    font-size: 1.3rem;
+}
+
+.label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #cfcfcf;
+    outline: none;
+}
+
+.input:disabled {
+    background: #f6f6f6;
+    color: #777;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background: #eee;
+    margin: 14px 0;
+}
+
+.debug {
+    margin: 8px 0 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.ok {
+    margin-top: 8px;
+    color: #1b7f2a;
+    font-weight: 800;
+}
+
+.error {
+    display: block;
+    margin-top: 8px;
+    color: #b00020;
+    font-weight: 700;
+}
+
+.btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 800;
+    margin-top: 14px;
+}
+
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #111;
+    color: #fff;
+}

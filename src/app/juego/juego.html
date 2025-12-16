@@ -1,0 +1,41 @@
+<h2 class="title">
+  Ongi Etorri {{ configuracion.fullName }}
+</h2>
+
+<hr class="divider" />
+
+<label class="label">
+  Introduce tu número:
+  <input
+    class="input"
+    type="number"
+    [(ngModel)]="guess"
+    name="guess"
+    [disabled]="mensaje === 'Has Ganado' || mensaje === 'Has perdido'"
+  />
+</label>
+
+<button
+  class="btn btn-primary"
+  type="button"
+  (click)="enviar()"
+  [disabled]="mensaje === 'Has Ganado' || mensaje === 'Has perdido'"
+>
+  Enviar
+</button>
+
+<p class="status" *ngIf="mensaje">{{ mensaje }}</p>
+
+<p class="attempts">
+  Intentos restantes: <b>{{ intentosRestantes }}</b>
+</p>
+
+<!--Botón para volver a jugar -->
+<button
+  class="btn btn-secondary"
+  *ngIf="mensaje === 'Has Ganado' || mensaje === 'Has perdido'"
+  type="button"
+  (click)="volverAJugar()"
+>
+  Volver a jugar
+</button>
